@@ -13,5 +13,10 @@
 		<p>Please wait while we connect you</p>
 		<div class="loader"></div>
 	</div>
+<script>
+	setTimeout(function(){
+		window.location.href = "chat.jsp";
+	}, 3000);
+</script>
 </body>
 </html>

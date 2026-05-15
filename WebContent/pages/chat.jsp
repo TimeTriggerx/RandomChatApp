@@ -13,14 +13,13 @@
 			<h2>Random Chat</h2>
 			<button class="skip-btn">Skip</button>
 		</div>
-		<div class="chat-box">
-			<div class="message stranger">Hello stranger!</div>
-			<div class="message you">Hi!</div>
+		<div class="chat-box" id="chatBox">
 		</div>
 		<div class="chat-input">
-			<input type="text" placeholder="Type a message...">
-			<button>Send</button>
+			<input type="text" id="messageInput" placeholder="Type a message...">
+			<button onclick="sendMessage()">Send</button>
 		</div>
 	</div>
+	<script src="../js/chat.js"></script>
 </body>
 </html>
