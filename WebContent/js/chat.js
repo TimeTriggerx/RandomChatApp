@@ -89,3 +89,7 @@ function getAutoReply(){
 	);
 	return replies[randomIndex];
 }
+function skipChat(){
+	window.location.href =
+		"waiting.jsp";
+}

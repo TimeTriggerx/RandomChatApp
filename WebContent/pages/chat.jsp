@@ -11,7 +11,19 @@
 	<div class="chat-container">
 		<div class="chat-header">
 			<h2>Random Chat</h2>
-			<button class="skip-btn">Skip</button>
+			<p class="user-id">
+				You are:
+				<%=
+					session.getAttribute("userId")
+				%>
+			</p>
+			<p class="user-id">
+				Stranger:
+				<%=
+					session.getAttribute("strangerId")
+				%>
+			</p>
+			<button class="skip-btn" onclick="skipChat()">Skip</button>
 		</div>
 		<div class="chat-box" id="chatBox">
 		</div>

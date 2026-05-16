@@ -11,7 +11,7 @@
 	<div class="container">
 		<h1>Random Chat</h1>
 		<p>Talk anonymously with strangers</p>
-		<a href="pages/waiting.jsp">
+		<a href="start-chat">
 			<button>Start Chat</button>
 		</a>
 	</div>

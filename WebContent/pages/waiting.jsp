@@ -14,9 +14,21 @@
 		<div class="loader"></div>
 	</div>
 <script>
-	setTimeout(function(){
-		window.location.href = "chat.jsp";
-	}, 3000);
+	function checkMatch() {
+		fetch("../check-match")
+		
+		.then(response =>
+			response.text()
+		)
+		
+		.then(data => {
+			if (data === "matched") {
+				window.location.href = 
+					"chat.jsp";
+			}
+		});
+	}
+	setInterval(checkMatch, 2000);
 </script>
 </body>
 </html>
