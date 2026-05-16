@@ -5,65 +5,17 @@ function sendMessage(){
 	if(message === "") {
 		return;
 	}
-	let messageDiv = document.createElement("div");
-	messageDiv.classList.add(
-		"message", 
-		"you"
-	);
-	messageDiv.innerText = message;
-	chatBox.appendChild(messageDiv);
 	input.value = "";
 	chatBox.scrollTop = chatBox.scrollHeight;
-	let typingDiv =
-	document.createElement(
-		"div"
-	);
-	typingDiv.classList.add(
-		"message",
-		"stranger"
-	);
-	typingDiv.id = "typing";
-	typingDiv.innerHTML =
-		`Stranger is typing<span id="dots">.</span>`;
-	chatBox.appendChild(
-		typingDiv
-	);
-	let dots =
-	document.getElementById(
-		"dots"
-	);
-	let count = 1;
-	let typingAnimation =
-	setInterval(function(){
-		count++;
-		if(count > 3){
-			count = 1;
-		}
-		dots.innerText =
-			".".repeat(count);
-	}, 400);
-	chatBox.scrollTop =
-		chatBox.scrollHeight;
-	setTimeout(function(){
-		clearInterval(typingAnimation);
-		document.getElementById("typing").remove();
-		let strangerDiv =
-		document.createElement(
-			"div"
-		);
-		strangerDiv.classList.add(
-			"message",
-			"stranger"
-		);
-		strangerDiv.innerText =
-			getAutoReply();
-		chatBox.appendChild(
-			strangerDiv
-		);
-		chatBox.scrollTop =
-		chatBox.scrollHeight;
-	}, 2000);
+	fetch("../send-message", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		body: "message=" + encodeURIComponent(message)
+	});
 }
+
 document.getElementById("messageInput")
 .addEventListener(
     "keypress",
@@ -73,23 +25,39 @@ document.getElementById("messageInput")
         }
     }
 );
-function getAutoReply(){
-	let replies = [
-		"Hello!",
-		"How are you?",
-		"Nice to meet you!",
-		"That's interesting.",
-		"Tell me more.",
-		"Cool!",
-		"What are your hobbies?",
-		"Where are you from?"
-	];
-	let randomIndex = Math.floor(
-		Math.random() * replies.length
-	);
-	return replies[randomIndex];
-}
+
 function skipChat(){
 	window.location.href =
 		"waiting.jsp";
 }
+
+function loadMessages() {
+
+	fetch("../get-messages")
+	.then(response => response.text())
+	.then(data => {
+		let chatBox =document.querySelector("#chatBox");
+		chatBox.innerHTML = "";
+		let messages = data.trim().split("\n");
+
+		messages.forEach(function(message){
+			if(message.trim() === ""){
+				return;
+			}
+			let div = document.createElement("div");
+			div.classList.add("message");
+			let parts = message.split(":");
+			let senderId = parts[0];
+			let actualMessage = parts.slice(1).join(":");
+			div.innerText =	actualMessage;
+			if(senderId === currentUserId){
+				div.classList.add("you");
+			} else{
+				div.classList.add("stranger");
+			}
+			chatBox.appendChild(div);
+		});
+		chatBox.scrollTop = chatBox.scrollHeight;
+	});
+}
+setInterval(loadMessages, 1000);

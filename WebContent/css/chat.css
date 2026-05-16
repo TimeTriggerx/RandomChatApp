@@ -39,28 +39,36 @@ body {
 }
 
 .chat-box {
+	display: flex;
+	flex-direction: column;
 	flex: 1;
 	padding: 20px;
 	overflow-y: auto;
 }
 
 .message {
-	padding: 12px;
-	margin-bottom: 15px;
-	border-radius: 10px;
+	padding: 12px 16px;
+	margin: 10px;
+	border-radius: 14px;
 	width: fit-content;
 	max-width: 70%;
-}
-
-.stranger {
-	background: #334155;
+	word-wrap: break-word;
 	color: white;
+	font-size: 15px;
 }
 
 .you {
+	align-self: flex-end;
 	background: #3b82f6;
-	color: white;
 	margin-left: auto;
+	text-align: right;
+}
+
+.stranger {
+	align-self: flex-start;
+	background: #374151;
+	margin-right: auto;
+	text-align: left;
 }
 
 .chat-input {
@@ -86,13 +94,15 @@ body {
 	color: white;
 	cursor: pointer;
 }
-#typing{
+
+#typing {
 	font-style: italic;
-	opacity : 0.8;
-	font-size: 14px;	
+	opacity: 0.8;
+	font-size: 14px;
 }
-.user-id{
-    font-size:12px;
-    opacity:0.7;
-    margin-top:5px;
+
+.user-id {
+	font-size: 12px;
+	opacity: 0.7;
+	margin-top: 5px;
 }

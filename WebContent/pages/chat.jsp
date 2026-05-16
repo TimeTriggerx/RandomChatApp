@@ -32,6 +32,10 @@
 			<button onclick="sendMessage()">Send</button>
 		</div>
 	</div>
+	<script>
+		const currentUserId = 
+			"<%= session.getAttribute("userId") %>";
+	</script>
 	<script src="../js/chat.js"></script>
 </body>
 </html>
