@@ -1,328 +1,229 @@
-# 💬 RandomChatApp
+# RandomChatApp
 
-A real-time anonymous chat application built using **Java Servlets, JSP, HTML, CSS, and JavaScript**. Users are anonymously matched with another online user and can exchange messages in real time through a simple and responsive chat interface.
+RandomChatApp is a web-based anonymous chat application developed using Java Servlets, JSP, HTML, CSS, and JavaScript. The application allows two users to communicate anonymously by matching them through a server-side matchmaking mechanism and providing real-time synchronized messaging.
 
-> **Current Status:** Prototype with real matchmaking and synchronized backend messaging.
-
----
-
-# 📌 Features
-
-* ✅ Anonymous user matchmaking
-* ✅ Automatic waiting queue
-* ✅ Session-based user management
-* ✅ Real-time synchronized messaging (AJAX Polling)
-* ✅ Responsive chat interface
-* ✅ Automatic room generation
-* ✅ Multi-user support across browsers
-* ✅ Git version controlled
+The project is designed to demonstrate client-server communication, session management, layered architecture, and asynchronous web programming using Java EE technologies.
 
 ---
 
-# 🛠 Tech Stack
+## Features
+
+- Anonymous one-to-one chat
+- Automatic user matchmaking
+- Session-based user identification
+- Real-time message synchronization using AJAX polling
+- Responsive chat interface
+- Dynamic room generation for each conversation
+- Multi-browser support for concurrent users
+
+---
+
+## Technology Stack
 
 ### Backend
-
-* Java
-* Java Servlets
-* JSP (Java Server Pages)
+- Java
+- Java Servlets
+- JSP (JavaServer Pages)
 
 ### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
-* Fetch API (AJAX)
+- HTML5
+- CSS3
+- JavaScript
+- Fetch API (AJAX)
 
 ### Server
-
-* Apache Tomcat 9
+- Apache Tomcat 9
 
 ### Version Control
-
-* Git
-* GitHub
+- Git
+- GitHub
 
 ---
 
-# 📂 Project Structure
+## Project Structure
 
 ```
-RandomChatApp/
+RandomChatApp
 │
-├── src/
-│   ├── controller/
+├── src
+│   ├── controller
 │   │   ├── StartChatServlet.java
 │   │   ├── CheckMatchServlet.java
 │   │   ├── SendMessageServlet.java
 │   │   └── GetMessagesServlet.java
 │   │
-│   └── service/
+│   └── service
 │       ├── MatchMakingService.java
 │       └── MessageService.java
 │
-├── WebContent/
-│   ├── pages/
+├── WebContent
+│   ├── pages
 │   │   ├── index.jsp
 │   │   ├── waiting.jsp
 │   │   └── chat.jsp
 │   │
-│   ├── css/
-│   │   ├── styles.css
-│   │   └── chat.css
-│   │
-│   └── js/
-│       └── chat.js
+│   ├── css
+│   └── js
 │
 └── README.md
 ```
 
 ---
 
-# 🏗 Architecture
+## System Architecture
 
 ```
-Browser
-
-   │
-
-   ▼
-
-JSP + JavaScript
-
-   │
-
-   ▼
-
-Servlet Controllers
-
-   │
-
-   ▼
-
-Service Layer
-
-   │
-
-   ▼
-
-In-Memory Data Structures
-(HashMap)
+Client (Browser)
+        │
+        ▼
+ JSP / JavaScript
+        │
+        ▼
+ Servlet Controllers
+        │
+        ▼
+ Business Services
+        │
+        ▼
+ In-Memory Storage
 ```
 
 ---
 
-# 🚀 Application Flow
+## Request Flow
 
-```
-Home Page
-
-      │
-
-      ▼
-
-Start Chat
-
-      │
-
-      ▼
-
-StartChatServlet
-
-      │
-
-      ▼
-
-MatchMakingService
-
-      │
-
-      ▼
-
-Matched ?
-
- ┌──────────────┐
- │              │
- │ No           │ Yes
- │              │
- ▼              ▼
-
-Waiting      Chat Room
-
-                 │
-
-                 ▼
-
-      SendMessageServlet
-
-                 │
-
-                 ▼
-
-        MessageService
-
-                 │
-
-                 ▼
-
-      GetMessagesServlet
-
-                 │
-
-                 ▼
-
-         Updated Chat UI
-```
+1. A user opens the application.
+2. A new HTTP session is created.
+3. The user requests to start a chat.
+4. The matchmaking service places the user into a waiting queue.
+5. When another user joins, both users are paired.
+6. A unique room identifier is generated.
+7. Messages are exchanged through the server.
+8. Clients periodically request updated messages using AJAX polling.
 
 ---
 
-# 🧠 Core Modules
+## Core Components
 
-## 1. MatchMakingService
+### MatchMakingService
 
 Responsible for:
 
-* Managing waiting users
-* Matching two anonymous users
-* Maintaining user sessions
+- Managing waiting users
+- Pairing anonymous users
+- Maintaining active chat sessions
 
----
-
-## 2. MessageService
+### MessageService
 
 Responsible for:
 
-* Creating chat rooms
-* Storing messages
-* Retrieving conversation history
+- Creating unique chat rooms
+- Storing messages
+- Retrieving conversation history
+
+### Controller Layer
+
+The controller layer consists of the following servlets:
+
+- StartChatServlet
+- CheckMatchServlet
+- SendMessageServlet
+- GetMessagesServlet
+
+These servlets handle HTTP requests and coordinate communication between the presentation layer and the service layer.
 
 ---
 
-## 3. Controller Layer
+## Design Principles
 
-Handles all HTTP requests.
+The project follows a layered architecture consisting of:
 
-Current servlets:
+- Presentation Layer (JSP, HTML, CSS, JavaScript)
+- Controller Layer (Servlets)
+- Service Layer (Business Logic)
 
-* StartChatServlet
-* CheckMatchServlet
-* SendMessageServlet
-* GetMessagesServlet
-
----
-
-## 4. Frontend
-
-Provides:
-
-* Landing page
-* Waiting animation
-* Chat interface
-* Message rendering
-* AJAX communication
+This separation improves maintainability, readability, and extensibility.
 
 ---
 
-# ⚙️ How It Works
+## Current Limitations
 
-1. User opens the application.
-2. A unique session is created.
-3. User enters the matchmaking queue.
-4. When another user joins, both users are matched.
-5. A unique chat room is generated.
-6. Messages are stored on the server.
-7. Clients poll the server periodically to receive new messages.
+The current implementation is intended as a prototype.
 
----
+Limitations include:
 
-# 📷 Current Features
-
-* Anonymous chatting
-* Session-based matchmaking
-* Real-time message synchronization
-* Responsive UI
-* AJAX communication
-* Browser-to-browser messaging
+- Data is stored in memory using Java collections.
+- Messages are not persisted after server restart.
+- AJAX polling is used instead of WebSockets.
+- User authentication is not implemented.
+- Database integration is pending.
+- Skip/disconnect functionality is under development.
 
 ---
 
-# 🚧 Current Limitations
+## Future Enhancements
 
-The project is currently an educational prototype.
+Planned improvements include:
 
-Current limitations include:
-
-* Messages stored only in memory
-* No database integration
-* No user authentication
-* Uses AJAX polling instead of WebSockets
-* Skip/disconnect lifecycle not yet implemented
-
----
-
-# 🎯 Future Improvements
-
-* MySQL database integration
-* User authentication
-* WebSocket support
-* Skip & reconnect functionality
-* Online/offline status
-* Chat history persistence
-* Deployment to cloud
-* Mobile-friendly improvements
+- MySQL database integration
+- User authentication
+- WebSocket-based real-time communication
+- Skip and reconnect functionality
+- Chat history persistence
+- Online/offline presence detection
+- Cloud deployment
 
 ---
 
-# ▶️ Running the Project
+## Installation
 
 ### Prerequisites
 
-* Java 8+
-* Eclipse IDE
-* Apache Tomcat 9
-* Git
+- Java 8 or later
+- Eclipse IDE
+- Apache Tomcat 9
 
 ### Steps
 
-1. Clone the repository
+Clone the repository:
 
+```bash
+git clone https://github.com/<username>/RandomChatApp.git
 ```
-git clone https://github.com/<your-username>/RandomChatApp.git
-```
 
-2. Import as **Dynamic Web Project** into Eclipse.
+Import the project as a Dynamic Web Project.
 
-3. Configure Apache Tomcat.
+Configure Apache Tomcat.
 
-4. Run the project.
+Run the application.
 
-5. Open:
+Open:
 
 ```
 http://localhost:8080/RandomChatApp
 ```
 
-6. Open another browser or incognito window to simulate a second user.
+To simulate multiple users, open another browser or an incognito window.
 
 ---
 
-# 📚 Concepts Demonstrated
+## Concepts Demonstrated
 
-* Java Servlets
-* JSP
-* HTTP Request/Response
-* Session Management
-* AJAX Polling
-* Layered Architecture
-* Separation of Concerns
-* Client–Server Communication
-* Real-time Messaging
-* Version Control using Git
+- Java Servlets
+- JSP
+- Session Management
+- Client-Server Architecture
+- AJAX Communication
+- HTTP Request/Response Lifecycle
+- Layered Software Architecture
+- Separation of Concerns
+- Real-Time Web Communication
+- Version Control using Git
 
 ---
 
-# 👨‍💻 Author
+## Author
 
 **Bhuvaneshwar Pratap**
 
-Built as a learning project to understand real-time communication, Java web development, and software architecture using Servlets and JSP.
+This project was developed as part of learning Java Web Development and real-time client-server application design using Servlets and JSP.
