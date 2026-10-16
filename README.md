@@ -188,7 +188,7 @@ Planned improvements include:
 Clone the repository:
 
 ```bash
-git clone https://github.com/<username>/RandomChatApp.git
+git clone https://github.com/TimeTriggerx/RandomChatApp.git
 ```
 
 Import the project as a Dynamic Web Project.
